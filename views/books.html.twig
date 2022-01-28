@@ -1,0 +1,75 @@
+{% extends "template.html.twig" %}
+
+{% block title %} Livres{% endblock %}
+{% block contents %} 
+{% if message|length > 0 %}
+    <div class="alert alert-{{message.type}}" role="alert">
+        {{message.contents}}
+    </div>
+{% endif %}
+   <table class="table text-center monTableau" id="tableauLivres">
+        <thead>
+            <tr class="table-dark">
+                <th>Image</th>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Genre</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for book in books %}
+            <tr>
+                <td class="align-middle"><img src="images/{{book.image}}" width="60px"></td>
+                <td class="align-middle"><a href="/books/{{book._id}}">{{book.title}}</a></td>
+                <td class="align-middle"><a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></td>
+                <td class="align-middle">{{book.genre}}</td>
+                <td class="align-middle"><a href="/books/update/{{book._id}}" class="btn btn-warning">Modifier</a></td>
+                <td class="align-middle">
+                    <form 
+                        method="POST" 
+                        action="/books/delete/{{book._id}}" 
+                        onSubmit= "return confirm('Voulez-vous vraiment supprimer ?');">
+                        <button class="btn btn-danger" type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn btn-success w-100" onClick="displayForm()">Ajouter</button>
+    <form id="addForm" class="d-none" method ="POST" action="/books" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Création d'un livre</legend>
+            <div class="form-group">
+                <label for="title">Titre</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label for="author">Auteur</label>
+                <select class="form-control" id="author" name="author">
+                    {% for author in authors %}
+                        <option value="{{author._id}}">
+                            {{author.firstName}} {{author.name}}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <input type="text" class="form-control" id="genre" name="genre">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" class="form-control-file" id="image" name="image">
+            </div>
+            <button class="btn btn-primary" type="submit">Valider</button>
+        </fieldset>
+    </form>    
+    <script src="/scripts/addBook.js"></script>
+{% endblock %}
