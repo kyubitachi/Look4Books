@@ -17,8 +17,6 @@ exports.addBook = (req, res) => {
     .save()
     .then((result) => {
       res.redirect("/books");
-      //return book.save();
-      console.log("then");
     })
     .catch((error) => {
       console.log(error);

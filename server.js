@@ -15,6 +15,7 @@ require("dotenv").config();
 const port = process.env.APP_PORT;
 const localhost = process.env.APP_LOCALHOST;
 const secret = process.env.SECRET_APP;
+
 const dbcredentials = process.env.DB_CREDENTIALS;
 
 mongoose.connect(dbcredentials, {

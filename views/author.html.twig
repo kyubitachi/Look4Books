@@ -23,20 +23,22 @@
             </fieldset>
         </form>
     {% else %}
-        <div class="row">
-            {% for book in author.books %}
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-6">
-                            <img src="/images/{{book.image}}">
-                        </div>
-                        <div class="col-6">
-                            <div> Titre : <a href="/books/{{book._id}}"> {{book.title}} </a></div>
-                            <div> Genre : {{book.genre}} </div>
-                        </div>
-                    </div>                
-                </div>            
-            {% endfor %}
+        <div class="author-table">
+            <div class="row m-2">
+                {% for book in author.books %}
+                    <div class="col-6">
+                        <div class="row">                        
+                            <div class="col-6">
+                                <div> Titre : <a href="/books/{{book._id}}"> {{book.title}} </a></div>
+                                <div> Genre : {{book.genre}} </div>
+                            </div>
+                            <div class="col6">
+                                <img src="/images/{{book.image}}">
+                            </div>
+                        </div>                
+                    </div>            
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 {% endblock %}

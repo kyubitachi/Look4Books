@@ -59,17 +59,19 @@
 
     {% else %}
 
-    <div class="row m-2">
-        <div class="col-6">
-            <h2>Informations : </h2>
-            <div>Auteur : <a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></div>
-            <div>Genre : {{book.genre}} </div>
-            <img src="/images/{{book.image}}">
-        </div>
-        <div class="col-6">
-            <h2>Résumé : </h2>
-            <div>
-            {{book.description}}
+    <div class="book-table">
+        <div class="row m-2">
+            <div class="col-6">
+                <h2>Informations : </h2>
+                <div>Auteur : <a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></div>
+                <div>Genre : {{book.genre}} </div>
+                <img src="/images/{{book.image}}">
+            </div>
+            <div class="col-6">
+                <h2>Résumé : </h2>
+                <div>
+                {{book.description}}
+                </div>
             </div>
         </div>
     </div>
