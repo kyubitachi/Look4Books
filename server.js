@@ -4,6 +4,7 @@ const server = express();
 const morgan = require("morgan");
 const bookRouter = require("./routers/booksRouter");
 const authorRouter = require("./routers/authorsRouter");
+const extractRouter = require("./routers/extractRouter");
 const router = require("./routers/router");
 const api = require("./api/gutendex_api");
 const mongoose = require("mongoose");
@@ -49,6 +50,7 @@ server.use((req, res, next) => {
 
 server.use("/books/", bookRouter);
 server.use("/authors/", authorRouter);
+server.use("/extract/", extractRouter);
 server.use("/", router);
 
 server.listen(port, () => {

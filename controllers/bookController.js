@@ -139,12 +139,11 @@ exports.validateUpdate = (req, res) => {
 
 // update book's image
 exports.updateImage = (req, res) => {
-  console.log("salut");
   const book = Books.findById(req.body.id)
     .select("image")
     .exec()
     .then((book) => {
-      fs.unlink("../public/images/" + book.image, (error) => {
+      fs.unlink("./public/images/" + book.image, (error) => {
         console.log(error);
       });
     });
@@ -154,7 +153,7 @@ exports.updateImage = (req, res) => {
   Books.updateOne({ _id: req.body.id }, updateBook)
     .exec()
     .then((result) => {
-      res.redirect("/books/update/" + req.body.id);
+      res.redirect("/books"); // ("/books/update/"+req.body.id)
     })
     .catch((error) => {
       console.log(error);

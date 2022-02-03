@@ -33,26 +33,6 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
-// https://stackoverflow.com/questions/50144920/issue-with-multer-not-allowing-a-default-image
-/*
-router.post("/", upload.single("image"), bookController.addBook, (req, res) => {
-  User.findById(req.user._id, (err, user) => {
-    upload(req, res, (err) => {
-      if (err) {
-        console.log("1");
-        req.flash("error");
-        return res.redirect("/books");
-      }
-      const book = new Books();
-      if (typeof req.file === "undefined") {
-        console.log("2");
-        book.image = "../public/images/none.svg";
-      }
-    });
-  });
-});
-*/
-
 // add one book
 router.post("/", upload.single("image"), bookController.addBook);
 
@@ -65,9 +45,11 @@ router.get("/:id", bookController.displayBook);
 // update selected book
 router.get("/update/:id", bookController.updateBook);
 
+// update successfull
 router.post("/updateServer", bookController.validateUpdate);
 
-router.post("/updateImage", bookController.updateImage); // upload.single("image"),
+// update image for selected book
+router.post("/updateImage", upload.single("image"), bookController.updateImage);
 
 // delete selected book
 router.post("/delete/:id", bookController.deleteBook);
