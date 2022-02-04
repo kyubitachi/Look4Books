@@ -36,7 +36,7 @@ checkbox.addEventListener("click", function (event) {
     ) {
       main.style.marginLeft = "25%";
     } else if (window.matchMedia("(min-width: 1200px)").matches) {
-      main.style.marginLeft = "20%";
+      main.style.marginLeft = "15%";
     }
   } else {
     main.style.marginLeft = "0px";
@@ -83,7 +83,7 @@ window.addEventListener(
       ) {
         main.style.marginLeft = "25%";
       } else if (window.matchMedia("(min-width: 1200px)").matches) {
-        main.style.marginLeft = "20%";
+        main.style.marginLeft = "15%";
       }
     } else {
       main.style.marginLeft = "0px";
