@@ -4,6 +4,7 @@
 {% block contents %} 
     {% if isAnUpdate %}
 
+    <!-- update selected book -->
     <form method="POST" action="/books/updateServer">
             <div class="row m-2">
                 <div class="col-6">
@@ -42,11 +43,13 @@
             <input type="hidden" name="id" value="{{book._id}}">
             <input type="submit" class="btn btn-primary w-100" value="Valider">
         </form>
+
+        <!-- update selected book's image -->
         <form method="POST" action="/books/updateImage" enctype="multipart/form-data">
             <input type="hidden" name="id" value="{{book._id}}">
             <h2>Image</h2>
             <div class="row">
-                <img src="/images/{{book.image}}" class="col-3">
+                <img alt="book cover" src="/images/{{book.image}}" class="col-3">
                 <div class="col-9">
                     <div class="form-group">
                         <label for="image">Image</label>
@@ -59,13 +62,14 @@
 
     {% else %}
 
+    <!-- display selected book -->
     <div class="book-table">
         <div class="row m-2">
             <div class="col-6">
                 <h2>Informations : </h2>
                 <div>Auteur : <a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></div>
                 <div>Genre : {{book.genre}} </div>
-                <img src="/images/{{book.image}}">
+                <img alt="book cover" src="/images/{{book.image}}">
             </div>
             <div class="col-6">
                 <h2>Résumé : </h2>

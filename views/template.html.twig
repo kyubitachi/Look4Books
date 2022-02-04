@@ -1,71 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Look 4 Books permet de créer, modifier et supprimer un livre ou auteur">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Look 4 Books</title>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Look 4 Books permet de créer, modifier et supprimer un livre ou auteur.">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Look 4 Books</title>
 
-    <link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Sigmar+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/style.css"> 
-    <link rel="icon" type="image/png" href="../images/logo-white.png" />
-    
-</head>
-<body class="body">
-    <header>        
-        <nav class="sidebar">
-            <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
-            <label for="openSidebarMenu" class="sidebarIconToggle">
-                <div class="spinner diagonal part-1"></div>
-                <div class="spinner horizontal"></div>
-                <div class="spinner diagonal part-2"></div>
-            </label>
-            <div id="sidebarMenu">
+        <link rel="stylesheet" href="https://bootswatch.com/4/lumen/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Sigmar+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/style.css"> 
+        <link rel="icon" type="image/png" href="../images/logo-white.png" />
+        
+    </head>
+    <body class="body">
+        <header>        
+            <nav class="sidebar">
+                <!-- hamburger menu icon -->
+                <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+                <label for="openSidebarMenu" class="sidebarIconToggle">
+                    <span class="spinner diagonal part-1"></span>
+                    <span class="spinner horizontal"></span>
+                    <span class="spinner diagonal part-2"></span>
+                </label>
 
-                <a class="site-brand" href="/">
-                    <img
-                        class="logo"
-                        alt="Logo de Look 4 Books"
-                        src="../images/logo-black.png"
-                    />
-                    <span class="title">Look 4 Books</span>
-                </a>
-                <ul class="nav sidebarMenuInner">
-                    <li><a href="/">Accueil</a></li>
-                    <li><a href="/books">Livres</a></li>
-                    <li><a href="/authors">Auteurs</a></li>
-                    <li><a href="/extract">Extraits</a></li>
-                </ul>
-                <nav class="nav-footer">
-                    <p class="nav-footer-social-buttons">
-                    <a class="fa-icon" href="#">
-                        <i class="fa fa-facebook"></i>
+                <div id="sidebarMenu">
+                    <a class="site-brand" href="/">
+                        <!-- in public/js/svg -->
+                        <div class="svg-logo"></div>
+                        <span class="title">Look 4 Books</span>
                     </a>
-                    <a class="fa-icon" href="#">
-                        <i class="fa fa-instagram"></i>
-                    </a>                
-                    <a class="fa-icon" href="#">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    </p>
-                    <p>© Clémentine Leclerc</p>
-                </nav>  
+                    <ul class="nav sidebarMenuInner">
+                        <li><a href="/">Accueil</a></li>
+                        <li><a href="/books">Livres</a></li>
+                        <li><a href="/authors">Auteurs</a></li>
+                        <li><a href="/extract">Extraits</a></li>
+                    </ul>
+                    <!-- navbar footer -->
+                    <nav class="nav-footer">
+                        <p class="nav-footer-social-buttons">
+                        <a class="fa-icon" href="#">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="fa-icon" href="#">
+                            <i class="fa fa-instagram"></i>
+                        </a>                
+                        <a class="fa-icon" href="#">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        </p>
+                        <p>&copy; Clémentine Leclerc</p>
+                    </nav>  
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <h1 class="pageTitle">{% block title %} {% endblock %}</h1>
+            <div id="main">
+                {% block contents %} {% endblock %}
             </div>
-            <!--</div> -->
-        </nav>
-    </header>
+        </div>
 
-    <div class="container">
-        <h1 class="pageTitle">{% block title %} {% endblock %}</h1>
-        <main id="main">
-        {% block contents %} {% endblock %}
-        </main>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="/scripts/navbar.js"></script>
-</body>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous">
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous">
+        </script>
+        <script 
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous">
+        </script>
+        <script src="/scripts/navbar.js"></script>
+        <script src="/scripts/svg.js"></script>
+        
+    </body>
 </html>

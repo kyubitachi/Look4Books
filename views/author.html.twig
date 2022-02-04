@@ -3,6 +3,8 @@
 {% block title %}{{author.firstName}} {{author.name}} {{author.birthDate}}{% endblock %}
 {% block contents %} 
     {% if isUpdate %}
+
+        <!-- display selected author -->
         <form method ="POST" action="/authors/updateServer">
             <fieldset>
                 <legend>Modification d'un auteur</legend>
@@ -23,6 +25,8 @@
             </fieldset>
         </form>
     {% else %}
+
+        <!-- display selected author -->
         <div class="author-table">
             <div class="row m-2">
                 {% for book in author.books %}
@@ -33,7 +37,7 @@
                                 <div> Genre : {{book.genre}} </div>
                             </div>
                             <div class="col6">
-                                <img src="/images/{{book.image}}">
+                                <img alt="book cover" src="/images/{{book.image}}">
                             </div>
                         </div>                
                     </div>            

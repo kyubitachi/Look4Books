@@ -2,6 +2,8 @@
 
 {% block title %} Auteurs {% endblock %}
 {% block contents %} 
+
+    <!-- display all authors -->
      <table class="table text-center monTableau" id="tableauLivres">
         <thead>
             <tr class="table-dark">
@@ -31,6 +33,8 @@
         </tbody>
     </table>
     <button class="btn btn-success w-100" onClick="displayForm()">Ajouter</button>
+
+    <!-- create new author -->
     <form id="addForm" class="d-none" method ="POST" action="">
         <fieldset>
             <legend>Création d'un auteur</legend>

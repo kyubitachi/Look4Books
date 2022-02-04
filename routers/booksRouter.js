@@ -4,6 +4,7 @@ const multer = require("multer");
 const bookController = require("../controllers/bookController");
 const Books = require("../models/Books");
 
+// save image and rename it with today's date
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./public/images/");

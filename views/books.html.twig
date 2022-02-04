@@ -7,6 +7,8 @@
         {{message.contents}}
     </div>
 {% endif %}
+
+    <!-- display all books -->
    <table class="table text-center monTableau" id="tableauLivres">
         <thead>
             <tr class="table-dark">
@@ -21,7 +23,7 @@
 
         {% for book in books %}
             <tr>
-                <td class="align-middle"><img src="images/{{book.image}}" width="60px"></td>
+                <td class="align-middle"><img alt="book cover" src="images/{{book.image}}" width="60px"></td>
                 <td class="align-middle"><a href="/books/{{book._id}}">{{book.title}}</a></td>
                 <td class="align-middle"><a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></td>
                 <td class="align-middle">{{book.genre}}</td>
@@ -39,6 +41,8 @@
         </tbody>
     </table>
     <button class="btn btn-success w-100" onClick="displayForm()">Ajouter</button>
+
+    <!-- create new book -->
     <form id="addForm" class="d-none" method ="POST" action="/books" enctype="multipart/form-data">
         <fieldset>
             <legend>Création d'un livre</legend>
