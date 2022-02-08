@@ -5,11 +5,25 @@ const Books = require("../models/Books");
 
 // add one author
 exports.addAuthor = (req, res) => {
+  let nameRaw = req.body.name;
+  let firstNameRaw = req.body.firstName;
+  let birthDateRaw = req.body.birthDate;
+
+  if (nameRaw == "") {
+    nameRaw = "John";
+  }
+  if (firstNameRaw == "") {
+    firstNameRaw = "Doe";
+  }
+  if (birthDateRaw == "") {
+    birthDateRaw = 0;
+  }
+
   const author = new Authors({
     _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    firstName: req.body.firstName,
-    birthDate: req.body.birthDate,
+    name: nameRaw,
+    firstName: firstNameRaw,
+    birthDate: birthDateRaw,
   });
   author
     .save()

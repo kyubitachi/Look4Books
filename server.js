@@ -2,14 +2,16 @@ const express = require("express");
 const http = require("http");
 const server = express();
 const morgan = require("morgan");
-const bookRouter = require("./routers/booksRouter");
-const authorRouter = require("./routers/authorsRouter");
-const extractRouter = require("./routers/extractRouter");
-const router = require("./routers/router");
 const api = require("./api/gutendex_api");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+
+const bookRouter = require("./routers/booksRouter");
+const authorRouter = require("./routers/authorsRouter");
+const userRouter = require("./routers/usersRouter");
+const extractRouter = require("./routers/extractRouter");
+const router = require("./routers/router");
 
 require("dotenv").config();
 
@@ -50,6 +52,7 @@ server.use((req, res, next) => {
 
 server.use("/books/", bookRouter);
 server.use("/authors/", authorRouter);
+server.use("/auth/", userRouter);
 server.use("/extract/", extractRouter);
 server.use("/", router);
 

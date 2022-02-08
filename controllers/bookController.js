@@ -5,13 +5,26 @@ const Authors = require("../models/Authors");
 
 // add one book
 exports.addBook = (req, res) => {
-  console.log("in addbook");
+  let titleRaw = req.body.title;
+  let genreRaw = req.body.genre;
+  let descriptionRaw = req.body.description;
+
+  if (titleRaw == "") {
+    titleRaw = "Unknown";
+  }
+  if (genreRaw == "") {
+    genreRaw = "Unknown";
+  }
+  if (descriptionRaw == "") {
+    descriptionRaw = "Unknown";
+  }
+
   const book = new Books({
     _id: new mongoose.Types.ObjectId(),
-    title: req.body.title,
+    title: titleRaw,
     author: req.body.author,
-    genre: req.body.genre,
-    description: req.body.description,
+    genre: genreRaw,
+    description: descriptionRaw,
     image: req.file.path.substring(14),
   })
     .save()

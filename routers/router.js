@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const twig = require("twig");
 
+// Showing home page
 router.get("/", (req, res) => {
   res.render("home.html.twig");
 });
