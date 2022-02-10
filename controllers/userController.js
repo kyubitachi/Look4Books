@@ -24,7 +24,7 @@ module.exports = class UserController {
     });
   }
 
-  static signup = (req, res) => {
+  static signup(req, res) {
     User.register(
       { username: req.body.email },
       req.body.password,
@@ -54,7 +54,7 @@ module.exports = class UserController {
         }
       }
     );
-  };
+  }
 
   static login = (req, res, next) => {
     const authenticate = User.authenticate();
