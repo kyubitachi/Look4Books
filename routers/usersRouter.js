@@ -1,14 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
-const path = require("path");
+const User = require("../models/Users");
 
+User.createStrategy();
+
+// auth signup
 router.get("/signup", function (req, res) {
-  res.render(path.join(__dirname, "..", "/views/signup.html.twig"));
+  res.render("signup.html.twig");
 });
 
+// auth login
 router.get("/login", function (req, res) {
-  res.render(path.join(__dirname, "..", "/views/login.html.twig"));
+  res.render("login.html.twig");
 });
 
 router.post("/signup", userController.signup);

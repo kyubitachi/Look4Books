@@ -50,7 +50,21 @@ exports.displayBooks = (req, res) => {
         .populate("author")
         .exec()
         .then((books) => {
+          if ("user_id" in req.session) {
+            user_id = req.session.user_id;
+          } else {
+            user_id = "None";
+          }
+          if ("user_auth" in req.session) {
+            user_auth = req.session.user_auth;
+          } else {
+            user_auth = false;
+          }
+          console.log(req.session);
+
           res.render("books.html.twig", {
+            user_id: user_id,
+            user_auth: user_auth,
             books: books,
             authors: authors,
             message: res.locals.message,
@@ -75,7 +89,21 @@ exports.displayBook = (req, res) => {
     .populate("author")
     .exec()
     .then((book) => {
+      if ("user_id" in req.session) {
+        user_id = req.session.user_id;
+      } else {
+        user_id = "None";
+      }
+      if ("user_auth" in req.session) {
+        user_auth = req.session.user_auth;
+      } else {
+        user_auth = false;
+      }
+      console.log(req.session);
+
       res.render("book.html.twig", {
+        user_id: user_id,
+        user_auth: user_auth,
         book: book,
         isAnUpdate: false,
       });

@@ -30,11 +30,19 @@
                         <div class="svg-logo"></div>
                         <span class="title">Look 4 Books</span>
                     </a>
+                    
                     <ul class="nav sidebarMenuInner">
                         <li><a href="/">Accueil</a></li>
-                        <li><a href="/auth/signup">Inscription</a></li>
-                        <li><a href="/auth/login">Connexion</a></li>
-                        <li><a href="/auth/logout">Déconnexion</a></li>
+                        {% if user_auth == false %}
+                            <li><a href="/auth/signup">Inscription</a></li>
+                            <li><a href="/auth/login">Connexion</a></li>
+                        {% elseif user_auth %}
+                            <li><span class="user"> {{user_id}} </span></li>
+                            <li><a href="/auth/logout">Déconnexion</a></li>    
+                        {% else %}
+                            <li><a href="/auth/signup">Inscription</a></li>
+                            <li><a href="/auth/login">Connexion</a></li>
+                        {% endif %}
                         <li><a href="/books">Livres</a></li>
                         <li><a href="/authors">Auteurs</a></li>
                         <li><a href="/extract">Extraits</a></li>

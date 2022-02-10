@@ -46,7 +46,23 @@ exports.displayAuthors = (req, res) => {
     .populate("books")
     .exec()
     .then((authors) => {
-      res.render("authors.html.twig", { authors: authors });
+      if ("user_id" in req.session) {
+        user_id = req.session.user_id;
+      } else {
+        user_id = "None";
+      }
+      if ("user_auth" in req.session) {
+        user_auth = req.session.user_auth;
+      } else {
+        user_auth = false;
+      }
+      console.log(req.session);
+
+      res.render("authors.html.twig", {
+        user_id: user_id,
+        user_auth: user_auth,
+        authors: authors,
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -63,7 +79,24 @@ exports.displayAuthor = (req, res) => {
     .populate("books")
     .exec()
     .then((author) => {
-      res.render("author.html.twig", { author: author, isUpdate: false });
+      if ("user_id" in req.session) {
+        user_id = req.session.user_id;
+      } else {
+        user_id = "None";
+      }
+      if ("user_auth" in req.session) {
+        user_auth = req.session.user_auth;
+      } else {
+        user_auth = false;
+      }
+      console.log(req.session);
+
+      res.render("author.html.twig", {
+        user_id: user_id,
+        user_auth: user_auth,
+        author: author,
+        isUpdate: false,
+      });
     })
     .catch((error) => {
       console.log(error);

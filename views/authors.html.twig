@@ -10,7 +10,11 @@
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Nombre de livres</th>
-                <th colspan="2">Actions</th>
+
+                {% if user_auth %}
+                    <th colspan="2">Actions</th>
+                {% endif %}
+
             </tr>
         </thead>
         <tbody>
@@ -19,6 +23,8 @@
                 <td class="align-middle"><a href="/authors/{{author._id}}">{{author.firstName}} </td>
                 <td class="align-middle"><a href="/authors/{{author._id}}">{{author.name}} </td>
                 <td class="align-middle">{{author.books.length}} </td>
+
+                {% if user_auth %}
                 <td class="align-middle"><a href="/authors/update/{{author._id}}" class="btn btn-warning">Modifier</a></td> 
                 <td class="align-middle">
                     <form 
@@ -28,11 +34,17 @@
                         <button class="btn btn-danger" type="submit">Supprimer</button>
                     </form>
                 </td>
+                {% endif %}
+
                 </tr>          
             {% endfor %}
+
         </tbody>
     </table>
+
+    {% if user_auth %}
     <button class="btn btn-success w-100" onClick="displayForm()">Ajouter</button>
+    {% endif %}
 
     <!-- create new author -->
     <form id="addForm" class="d-none" method ="POST" action="">

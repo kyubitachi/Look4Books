@@ -6,7 +6,11 @@ const api = require("./api/gutendex_api");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const passportLocalMongoose = require("passport-local-mongoose");
 
+const User = require("./models/Users");
 const bookRouter = require("./routers/booksRouter");
 const authorRouter = require("./routers/authorsRouter");
 const userRouter = require("./routers/usersRouter");
@@ -31,9 +35,16 @@ server.use(
     secret: secret,
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 6000000 },
   })
 );
+
+server.use(passport.initialize());
+server.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 server.use(express.static("public"));
 

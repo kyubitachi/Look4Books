@@ -2,11 +2,12 @@
 
 {% block title %} Livres{% endblock %}
 {% block contents %} 
-{% if message|length > 0 %}
-    <div class="alert alert-{{message.type}}" role="alert">
-        {{message.contents}}
-    </div>
-{% endif %}
+
+    {% if message|length > 0 %}
+        <div class="alert alert-{{message.type}}" role="alert">
+            {{message.contents}}
+        </div>
+    {% endif %}
 
     <!-- display all books -->
    <table class="table text-center monTableau" id="tableauLivres">
@@ -16,7 +17,11 @@
                 <th>Titre</th>
                 <th>Auteur</th>
                 <th>Genre</th>
-                <th colspan="2">Actions</th>
+
+                {% if user_auth %}
+                    <th colspan="2">Actions</th>
+                {% endif %}
+
             </tr>
         </thead>
         <tbody>
@@ -27,20 +32,28 @@
                 <td class="align-middle"><a href="/books/{{book._id}}">{{book.title}}</a></td>
                 <td class="align-middle"><a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></td>
                 <td class="align-middle">{{book.genre}}</td>
-                <td class="align-middle"><a href="/books/update/{{book._id}}" class="btn btn-warning">Modifier</a></td>
-                <td class="align-middle">
-                    <form 
-                        method="POST" 
-                        action="/books/delete/{{book._id}}" 
-                        onSubmit= "return confirm('Voulez-vous vraiment supprimer ?');">
-                        <button class="btn btn-danger" type="submit">Supprimer</button>
-                    </form>
-                </td>
+
+                {% if user_auth %}
+                    <td class="align-middle"><a href="/books/update/{{book._id}}" class="btn btn-warning">Modifier</a></td>
+                    <td class="align-middle">
+                        <form 
+                            method="POST" 
+                            action="/books/delete/{{book._id}}" 
+                            onSubmit= "return confirm('Voulez-vous vraiment supprimer ?');">
+                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                        </form>
+                    </td>
+                {% endif %}
+
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
+
+    {% if user_auth %}
     <button class="btn btn-success w-100" onClick="displayForm()">Ajouter</button>
+    {% endif %}
 
     <!-- create new book -->
     <form id="addForm" class="d-none" method ="POST" action="/books" enctype="multipart/form-data">

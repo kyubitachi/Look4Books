@@ -1,6 +1,14 @@
 const User = require("../models/Users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
+const { session } = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+
+// use static serialize and deserialize of model for passport session support
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 module.exports = class UserController {
   static getUsers(req, res) {
@@ -11,55 +19,66 @@ module.exports = class UserController {
 
   static getUser(req, res) {
     const id = req.params.id;
-    Article.findById(id).then(function (user) {
+    User.findById(id).then(function (user) {
       res.send(user);
     });
   }
 
-  static signup = (req, res, next) => {
-    bcrypt
-      .hash(req.body.password, 10) // 10 → encryption difficulty (longer time for higher number)
-      .then((hash) => {
-        const user = new User({
-          email: req.body.email,
-          password: hash,
-        });
-        user
-          .save()
-          .then(() => {
-            res.redirect("/");
-          })
-          .catch((error) => res.status(400).json({ error: "400" }));
-      })
-      .catch((error) => res.status(500).json({ error: "500" }));
+  static signup = (req, res) => {
+    User.register(
+      { username: req.body.email },
+      req.body.password,
+      function (err, user) {
+        if (err) {
+          console.log("err register " + err);
+        } else {
+          const authenticate = User.authenticate();
+          authenticate(req.body.email, req.body.password, function (err, user) {
+            if (err) {
+              console.log("Erreur d'authentification" + err);
+            } else {
+              if (user != false) {
+                req.session.user_id = req.body.email;
+                req.session.user_auth = true;
+                console.log(req.session);
+                res.redirect("/");
+              } else {
+                res.json({
+                  success: false,
+                  message: "L'authentication a échoué, veuillez réessayer",
+                });
+              }
+              console.log("isAuth " + user);
+            }
+          });
+        }
+      }
+    );
   };
 
   static login = (req, res, next) => {
-    User.findOne({ email: req.body.email })
-      .then((user) => {
-        if (!user) {
-          return res.status(401).json({ error: "Email incorrect" });
+    const authenticate = User.authenticate();
+    authenticate(req.body.email, req.body.password, function (err, user) {
+      if (err) {
+        console.log("Erreur d'authentification" + err);
+      } else {
+        if (user != false) {
+          req.session.user_id = req.body.email;
+          req.session.user_auth = true;
+          console.log(req.session);
+          res.redirect("/");
+        } else {
+          res.json({
+            success: false,
+            message: "L'authentication a échoué, veuillez réessayer",
+          });
         }
-        bcrypt
-          .compare(req.body.password, user.password)
-          .then((valid) => {
-            if (!valid) {
-              return res.status(401).json({ error: "Mot de passe incorrect" });
-            }
-            res.status(200).json({
-              userId: user._id,
-              token: jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
-                expiresIn: "24h",
-              }),
-            });
-          })
-          .catch((error) => res.status(500).json({ error: "400" }));
-      })
-      .catch((error) => res.status(500).json({ error: "500" }));
+      }
+    });
   };
 
   static logout = (req, res, next) => {
-    res.clearCookie("nToken");
+    req.session.destroy();
     return res.redirect("/");
   };
 };

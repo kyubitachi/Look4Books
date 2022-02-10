@@ -16,6 +16,10 @@
             <input type="submit" class="btn btn-primary w-10" value="Valider">
         </form>
 
+        {% if success %}
+            {{message}} pour {{token}}
+        {% endif %}
+
     </main>
 
 {% endblock %}

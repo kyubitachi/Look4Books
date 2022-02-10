@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const validator = require("mongoose-unique-validator");
 
+const passportLocalMongoose = require("passport-local-mongoose");
+
 const userSchema = mongoose.Schema({
-  email: {
+  username: {
     type: String,
     required: true,
     unique: true,
@@ -12,12 +14,8 @@ const userSchema = mongoose.Schema({
       "Please enter a valid email",
     ],
   },
-  password: {
-    type: String,
-    required: true,
-  },
 });
 
-userSchema.plugin(validator);
+userSchema.plugin(passportLocalMongoose, validator);
 
 module.exports = mongoose.model("Users", userSchema);
