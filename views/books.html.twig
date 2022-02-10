@@ -9,84 +9,86 @@
         </div>
     {% endif %}
 
-    <!-- display all books -->
-   <table class="table text-center monTableau" id="tableauLivres">
-        <thead>
-            <tr class="table-dark">
-                <th>Image</th>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>Genre</th>
+    <main class="book-main"> 
+        <!-- display all books -->
+    <table class="table text-center monTableau" id="tableauLivres">
+            <thead>
+                <tr class="table-dark">
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Genre</th>
 
-                {% if user_auth %}
-                    <th colspan="2">Actions</th>
-                {% endif %}
+                    {% if user_auth %}
+                        <th colspan="2">Actions</th>
+                    {% endif %}
 
-            </tr>
-        </thead>
-        <tbody>
+                </tr>
+            </thead>
+            <tbody>
 
-        {% for book in books %}
-            <tr>
-                <td class="align-middle"><img alt="book cover" src="images/{{book.image}}" width="60px"></td>
-                <td class="align-middle"><a href="/books/{{book._id}}">{{book.title}}</a></td>
-                <td class="align-middle"><a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></td>
-                <td class="align-middle">{{book.genre}}</td>
+            {% for book in books %}
+                <tr>
+                    <td class="align-middle"><img alt="book cover" src="images/{{book.image}}" width="60px"></td>
+                    <td class="align-middle"><a href="/books/{{book._id}}">{{book.title}}</a></td>
+                    <td class="align-middle"><a href="/authors/{{book.author._id}}">{{book.author.firstName}} {{book.author.name}}</a></td>
+                    <td class="align-middle">{{book.genre}}</td>
 
-                {% if user_auth %}
-                    <td class="align-middle"><a href="/books/update/{{book._id}}" class="btn btn-warning">Modifier</a></td>
-                    <td class="align-middle">
-                        <form 
-                            method="POST" 
-                            action="/books/delete/{{book._id}}" 
-                            onSubmit= "return confirm('Voulez-vous vraiment supprimer ?');">
-                            <button class="btn btn-danger" type="submit">Supprimer</button>
-                        </form>
-                    </td>
-                {% endif %}
+                    {% if user_auth %}
+                        <td class="align-middle"><a href="/books/update/{{book._id}}" class="btn btn-warning">Modifier</a></td>
+                        <td class="align-middle">
+                            <form 
+                                method="POST" 
+                                action="/books/delete/{{book._id}}" 
+                                onSubmit= "return confirm('Voulez-vous vraiment supprimer ?');">
+                                <button class="btn btn-danger" type="submit">Supprimer</button>
+                            </form>
+                        </td>
+                    {% endif %}
 
-            </tr>
-        {% endfor %}
+                </tr>
+            {% endfor %}
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    {% if user_auth %}
-    <button class="btn btn-success w-100" onClick="displayForm()">Ajouter</button>
-    {% endif %}
+        {% if user_auth %}
+        <button class="btn btn-success w-100" onClick="displayForm()">Ajouter</button>
+        {% endif %}
 
-    <!-- create new book -->
-    <form id="addForm" class="d-none" method ="POST" action="/books" enctype="multipart/form-data">
-        <fieldset>
-            <legend>Création d'un livre</legend>
-            <div class="form-group">
-                <label for="title">Titre</label>
-                <input type="text" class="form-control" id="title" name="title">
-            </div>
-            <div class="form-group">
-                <label for="author">Auteur</label>
-                <select class="form-control" id="author" name="author">
-                    {% for author in authors %}
-                        <option value="{{author._id}}">
-                            {{author.firstName}} {{author.name}}
-                        </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="genre">Genre</label>
-                <input type="text" class="form-control" id="genre" name="genre">
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="image">Image</label>
-                <input type="file" class="form-control-file" id="image" name="image" required>
-            </div>
-            <button class="btn btn-primary" type="submit">Valider</button>
-        </fieldset>
-    </form>    
+        <!-- create new book -->
+        <form id="addForm" class="d-none" method ="POST" action="/books" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Création d'un livre</legend>
+                <div class="form-group">
+                    <label for="title">Titre</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="author">Auteur</label>
+                    <select class="form-control" id="author" name="author">
+                        {% for author in authors %}
+                            <option value="{{author._id}}">
+                                {{author.firstName}} {{author.name}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <input type="text" class="form-control" id="genre" name="genre">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" required>
+                </div>
+                <button class="btn btn-primary" type="submit">Valider</button>
+            </fieldset>
+        </form>    
+    </main>
     <script src="/scripts/addBook.js"></script>
 {% endblock %}

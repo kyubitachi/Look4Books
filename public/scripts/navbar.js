@@ -8,7 +8,7 @@ checkbox.addEventListener("click", function (event) {
       main.style.display = "none";
       sidebarMenu.style.width = "100%";
     } else {
-      main.style.display = "inline-block";
+      main.style.display = "block";
       sidebarMenu.style.width = "230px";
     }
     if (
@@ -41,7 +41,7 @@ checkbox.addEventListener("click", function (event) {
   } else {
     main.style.marginLeft = "0px";
     if (window.matchMedia("(max-width: 479px)").matches) {
-      main.style.display = "inline-block";
+      main.style.display = "block";
       sidebarMenu.style.width = "230px";
     }
   }
@@ -55,7 +55,7 @@ window.addEventListener(
         main.style.display = "none";
         sidebarMenu.style.width = "100%";
       } else {
-        main.style.display = "inline-block";
+        main.style.display = "block";
         sidebarMenu.style.width = "230px";
       }
       if (
@@ -88,7 +88,7 @@ window.addEventListener(
     } else {
       main.style.marginLeft = "0px";
       if (window.matchMedia("(max-width: 479px)").matches) {
-        main.style.display = "inline-block";
+        main.style.display = "block";
         sidebarMenu.style.width = "230px";
       }
     }

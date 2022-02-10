@@ -67,10 +67,8 @@ body {
   text-align: center;
 }
 
-.home-main {
-  padding: 30px;
-  flex: 1;
-  display: inline-block;
+#main {
+  padding-top: 60px;
 }
 
 .book-table img,
@@ -83,13 +81,6 @@ body {
 
 /* --------- NAVBAR ----------- */
 
-.sidebar {
-  display: block;
-  margin: 0, auto;
-  position: relative;
-  z-index: 100;
-}
-
 #sidebarMenu {
   height: 94%;
   position: fixed;
@@ -100,7 +91,18 @@ body {
   transition: transform 250ms ease-in-out;
   background-color: var(--body-bg);
   z-index: 10;
-  margin-top: 55px;
+  margin-top: 70px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background-color: rgba(71, 71, 70, 0.014);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+#sidebarMenu > ul {
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .sidebarMenuInner {
@@ -159,7 +161,7 @@ body {
 
 .nav-footer {
   position: absolute;
-  margin: auto;
+  margin-bottom: 6%;
   left: 0;
   right: 0;
   bottom: 0;

@@ -3,46 +3,47 @@
 {% block title %}{{author.firstName}} {{author.name}} {{author.birthDate}}{% endblock %}
 {% block contents %} 
     {% if isUpdate %}
+        <main class="author-main" id="main-collapse"> 
+            <!-- display selected author -->
+            <form method ="POST" action="/authors/updateServer">
+                <fieldset>
+                    <legend>Modification d'un auteur</legend>
+                    <div class="form-group">
+                        <label for="firstName">Prénom</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" value="{{author.firstName}}">
+                    </div>       
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{author.name}}">
+                    </div>      
+                    <div class="form-group">
+                        <label for="birthDate">Date de naissance</label>
+                        <input type="number" class="form-control" id="birthDate" name="birthDate" value="{{author.birthDate}}">
+                    </div>
+                    <input type="hidden" name="id" value="{{author._id}}">
+                    <button class="btn btn-primary" type="submit">Valider</button>
+                </fieldset>
+            </form>
+        {% else %}
 
-        <!-- display selected author -->
-        <form method ="POST" action="/authors/updateServer">
-            <fieldset>
-                <legend>Modification d'un auteur</legend>
-                <div class="form-group">
-                    <label for="firstName">Prénom</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{author.firstName}}">
-                </div>       
-                <div class="form-group">
-                    <label for="name">Nom</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{author.name}}">
-                </div>      
-                <div class="form-group">
-                    <label for="birthDate">Date de naissance</label>
-                    <input type="number" class="form-control" id="birthDate" name="birthDate" value="{{author.birthDate}}">
+            <!-- display selected author -->
+            <div class="author-table">
+                <div class="row m-2">
+                    {% for book in author.books %}
+                        <div class="col-6">
+                            <div class="row">                        
+                                <div class="col-6">
+                                    <div> Titre : <a href="/books/{{book._id}}"> {{book.title}} </a></div>
+                                    <div> Genre : {{book.genre}} </div>
+                                </div>
+                                <div class="col6">
+                                    <img alt="book cover" src="/images/{{book.image}}">
+                                </div>
+                            </div>                
+                        </div>            
+                    {% endfor %}
                 </div>
-                <input type="hidden" name="id" value="{{author._id}}">
-                <button class="btn btn-primary" type="submit">Valider</button>
-            </fieldset>
-        </form>
-    {% else %}
-
-        <!-- display selected author -->
-        <div class="author-table">
-            <div class="row m-2">
-                {% for book in author.books %}
-                    <div class="col-6">
-                        <div class="row">                        
-                            <div class="col-6">
-                                <div> Titre : <a href="/books/{{book._id}}"> {{book.title}} </a></div>
-                                <div> Genre : {{book.genre}} </div>
-                            </div>
-                            <div class="col6">
-                                <img alt="book cover" src="/images/{{book.image}}">
-                            </div>
-                        </div>                
-                    </div>            
-                {% endfor %}
             </div>
-        </div>
+        </main>
     {% endif %}
 {% endblock %}
