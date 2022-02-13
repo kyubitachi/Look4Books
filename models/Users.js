@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const validator = require("mongoose-unique-validator");
-
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = mongoose.Schema({

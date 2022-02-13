@@ -11,20 +11,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 module.exports = class UserController {
-  static getUsers(req, res) {
-    User.find().then(function (users) {
-      res.send(users);
-    });
-  }
-
-  static getUser(req, res) {
-    const id = req.params.id;
-    User.findById(id).then(function (user) {
-      res.send(user);
-    });
-  }
-
-  static signup(req, res) {
+  static signup = (req, res) => {
     User.register(
       { username: req.body.email },
       req.body.password,
@@ -54,7 +41,7 @@ module.exports = class UserController {
         }
       }
     );
-  }
+  };
 
   static login = (req, res, next) => {
     const authenticate = User.authenticate();

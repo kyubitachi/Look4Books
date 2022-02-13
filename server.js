@@ -2,7 +2,6 @@ const express = require("express");
 const http = require("http");
 const server = express();
 const morgan = require("morgan");
-const api = require("./api/gutendex_api");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const session = require("express-session");
@@ -22,7 +21,6 @@ require("dotenv").config();
 const port = process.env.APP_PORT;
 const localhost = process.env.APP_LOCALHOST;
 const secret = process.env.SECRET_APP;
-
 const dbcredentials = process.env.DB_CREDENTIALS;
 
 mongoose.connect(dbcredentials, {
@@ -34,6 +32,7 @@ server.use(
   session({
     secret: secret,
     resave: true,
+    rolling: true,
     saveUninitialized: true,
     cookie: { maxAge: 6000000 },
   })

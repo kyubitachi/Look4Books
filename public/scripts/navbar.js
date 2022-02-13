@@ -1,3 +1,5 @@
+// makes site responsive when navbar is deployed
+
 let checkbox = document.querySelector("#openSidebarMenu");
 let main = document.querySelector("#main");
 let sidebarMenu = document.querySelector("#sidebarMenu");

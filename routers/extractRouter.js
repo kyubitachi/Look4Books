@@ -23,9 +23,4 @@ router.get("/", (req, res) => {
   });
 });
 
-/*
-router.get("/", function (req, res) {
-  res.render(path.join(__dirname, "..", "/views/extract.html.twig"));
-});
-*/
 module.exports = router;

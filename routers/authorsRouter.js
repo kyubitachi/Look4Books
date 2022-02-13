@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const twig = require("twig");
 const authorController = require("../controllers/authorController");
 
 // add one author
