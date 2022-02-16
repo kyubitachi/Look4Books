@@ -74,9 +74,13 @@ body {
 .book-table img,
 .author-table img {
   height: auto;
-  width: auto;
+  width: 100%;
   max-width: 500px;
-  max-height: 500px;
+}
+
+.author-table h2,
+.book-table h2 {
+  font-size: 2vmax;
 }
 
 /* --------- NAVBAR ----------- */
@@ -365,6 +369,14 @@ input[type="checkbox"]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 
 .fadeIn-bottom {
   top: 80%;
+}
+
+.pageTitle {
+  font-size: 3.5vmax;
+}
+
+.space {
+  margin-top: 80%;
 }
 
 /**********************************************

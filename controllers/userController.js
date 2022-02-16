@@ -1,8 +1,5 @@
 const User = require("../models/Users");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const { session } = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 // use static serialize and deserialize of model for passport session support

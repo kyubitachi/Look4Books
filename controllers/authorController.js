@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const fs = require("fs");
 const Authors = require("../models/Authors");
 const Books = require("../models/Books");
 

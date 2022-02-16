@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const passportLocalMongoose = require("passport-local-mongoose");
 
 const User = require("./models/Users");
 const bookRouter = require("./routers/booksRouter");
